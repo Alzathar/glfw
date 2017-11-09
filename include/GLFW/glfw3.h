@@ -819,6 +819,11 @@ extern "C" {
  *  Mouse cursor hover [window attribute](@ref GLFW_HOVERED_attrib).
  */
 #define GLFW_HOVERED                0x0002000B
+/*! @brief Occlusion window attribute
+ *
+ *  Occlusion [window attribute](@ref GLFW_OCCLUDED_attrib).
+ */
+#define GLFW_OCCLUDED               0x0002000C
 
 /*! @brief Framebuffer bit depth hint.
  *

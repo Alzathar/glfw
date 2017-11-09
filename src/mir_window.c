@@ -610,6 +610,11 @@ int _glfwPlatformWindowFocused(_GLFWwindow* window)
     return mir_window_get_focus_state(window->mir.window) == mir_window_focus_state_focused;
 }
 
+int _glfwPlatformWindowOccluded(_GLFWwindow* window)
+{
+    return GLFW_FALSE;
+}
+
 int _glfwPlatformWindowIconified(_GLFWwindow* window)
 {
     _glfwInputError(GLFW_PLATFORM_ERROR,

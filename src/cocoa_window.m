@@ -1478,6 +1478,11 @@ int _glfwPlatformWindowFocused(_GLFWwindow* window)
     return [window->ns.object isKeyWindow];
 }
 
+int _glfwPlatformWindowOccluded(_GLFWwindow* window)
+{
+    return !([window->ns.object occlusionState] & NSWindowOcclusionStateVisible);
+}
+
 int _glfwPlatformWindowIconified(_GLFWwindow* window)
 {
     return [window->ns.object isMiniaturized];
