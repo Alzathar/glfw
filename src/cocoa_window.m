@@ -325,6 +325,11 @@ static const NSRange kEmptyRange = { NSNotFound, 0 };
     _glfwInputWindowPos(window, x, y);
 }
 
+- (void)windowDidChangeOcclusionState:(NSNotification *)notification
+{
+    _glfwInputWindowOcclusion(window, !([window->ns.object occlusionState] & NSWindowOcclusionStateVisible));
+}
+
 - (void)windowDidMiniaturize:(NSNotification *)notification
 {
     if (window->monitor)
@@ -1496,6 +1501,11 @@ void _glfwPlatformSetWindowMonitor(_GLFWwindow* window,
 int _glfwPlatformWindowFocused(_GLFWwindow* window)
 {
     return [window->ns.object isKeyWindow];
+}
+
+int _glfwPlatformWindowOccluded(_GLFWwindow* window)
+{
+    return !([window->ns.object occlusionState] & NSWindowOcclusionStateVisible);
 }
 
 int _glfwPlatformWindowIconified(_GLFWwindow* window)
