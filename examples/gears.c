@@ -298,6 +298,18 @@ static void init(void)
   glEnable(GL_NORMALIZE);
 }
 
+void occlusion(GLFWwindow* window, int occluded)
+{
+    if (occluded)
+    {
+      fprintf(stdout, "Window occluded\n");
+    }
+    else
+    {
+      fprintf(stdout, "Window not fully occluded\n");
+    }
+}
+
 
 /* program entry */
 int main(int argc, char *argv[])
@@ -325,6 +337,7 @@ int main(int argc, char *argv[])
     // Set callback functions
     glfwSetFramebufferSizeCallback(window, reshape);
     glfwSetKeyCallback(window, key);
+    glfwSetWindowOcclusionCallback(window, occlusion);
 
     glfwMakeContextCurrent(window);
     gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
@@ -348,6 +361,14 @@ int main(int argc, char *argv[])
         // Swap buffers
         glfwSwapBuffers(window);
         glfwPollEvents();
+        
+        // At least under macOS, if the window is iconified (i.e. not visible)
+        // or fully occluded, the v-sync does not work anymore. Thus one core
+        // is used around 100% to draw and update a hidden windows...
+        // The following conditions solves the problem
+        if (glfwGetWindowAttrib(window, GLFW_VISIBLE) != GLFW_TRUE || glfwGetWindowAttrib(window, GLFW_OCCLUDED) == GLFW_TRUE) {
+          glfwWaitEvents();
+        }
     }
 
     // Terminate GLFW
