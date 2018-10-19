@@ -160,6 +160,18 @@ void _glfwPlatformGetMonitorPos(_GLFWmonitor* monitor, int* xpos, int* ypos)
         *ypos = monitor->wl.y;
 }
 
+void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height)
+{
+    if (xpos)
+        *xpos = monitor->wl.x;
+    if (ypos)
+        *ypos = monitor->wl.y;
+    if (width)
+        *width = monitor->modes[monitor->wl.currentMode].width;
+    if (height)
+        *height = monitor->modes[monitor->wl.currentMode].height;
+}
+
 void _glfwPlatformGetMonitorContentScale(_GLFWmonitor* monitor,
                                          float* xscale, float* yscale)
 {

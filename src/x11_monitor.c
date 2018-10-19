@@ -332,6 +332,27 @@ void _glfwPlatformGetMonitorPos(_GLFWmonitor* monitor, int* xpos, int* ypos)
     }
 }
 
+void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height)
+{
+    if (_glfw.x11.randr.available && !_glfw.x11.randr.monitorBroken)
+    {
+        Atom* extents = NULL;
+
+        _glfwGetWindowPropertyX11(_glfw.x11.root, _glfw.x11.NET_WORKAREA, XA_CARDINAL, (unsigned char**) &extents);
+
+        if (xpos)
+            *xpos = extents[0];
+        if (xpos)
+            *ypos = extents[1];
+        if (xpos)
+            *width = extents[2];
+        if (xpos)
+            *height = extents[3];
+
+        XFree(extents);
+    }
+}
+
 void _glfwPlatformGetMonitorContentScale(_GLFWmonitor* monitor,
                                          float* xscale, float* yscale)
 {

@@ -369,6 +369,25 @@ void _glfwPlatformGetMonitorPos(_GLFWmonitor* monitor, int* xpos, int* ypos)
         *ypos = (int) bounds.origin.y;
 }
 
+void _glfwPlatformGetMonitorWorkarea(_GLFWmonitor* monitor, int* xpos, int* ypos, int *width, int *height)
+{
+    NSScreen *resultScreen;
+    for (NSScreen *screen in [NSScreen screens]) {
+        if ([[[screen deviceDescription] valueForKey:@"NSScreenNumber"] intValue] == monitor->ns.displayID) {
+            NSRect frameRect = [screen visibleFrame];
+            if (xpos)
+                *xpos = NSMinX(frameRect);
+            if (ypos)
+                *ypos = NSMinY(frameRect);
+            if (width)
+                *width = NSWidth(frameRect);
+            if (height)
+                *height = NSHeight(frameRect);
+            break;
+        }
+    }
+}
+
 void _glfwPlatformGetMonitorContentScale(_GLFWmonitor* monitor,
                                          float* xscale, float* yscale)
 {

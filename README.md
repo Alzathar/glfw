@@ -124,6 +124,8 @@ information on what to include when reporting a bug.
 
 ## Changelog
 
+- Added `glfwGetMonitorWorkarea` function for querying the monitor work area
+  (#920)
 - Added `glfwGetError` function for querying the last error code and its
   description (#970)
 - Added `glfwUpdateGamepadMappings` function for importing gamepad mappings in
