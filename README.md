@@ -1,3 +1,10 @@
+**NOTE**: This branch is the combination of several PRs on top of the official 3.3 release. It is dedicated to test [Dear ImGui](https://github.com/ocornut/imgui) features in development (e.g viewport and docking). This branch is compiled regularly under macOS 10.12.6 and Windows 10.
+
+**PR on top of the 3.3 release**
+ - https://github.com/glfw/glfw/pull/1362 (Manage correctly the key combination Ctrl + Tab under macOS)
+
+----
+
 # GLFW
 
 [![Build status](https://travis-ci.org/glfw/glfw.svg?branch=master)](https://travis-ci.org/glfw/glfw)
